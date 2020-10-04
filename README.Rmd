@@ -2,9 +2,9 @@
 title: "Pedotransfer functions (PTFs) developed for Ksat using Random forest (RF) algorithm"
 authors: 
 date: "Surya Gupta, Tom Hengl, Peter Lehmann, Sara Bonetti, Dani Or"
-output:  github_document
-
-
+output: 
+  github_document:
+    toc: true
 ---
 Abstract:
 
