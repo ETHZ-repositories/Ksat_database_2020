@@ -12,8 +12,6 @@ Surya Gupta, Tom Hengl, Peter Lehmann, Sara Bonetti, Dani Or
     RF](#ksat-ptf-developed-for-lab-measurements-soil-samples-using-rf)
   - [Lab PTF tested on field dataset](#lab-ptf-tested-on-field-dataset)
 
-Abstract:
-
 We prepared a comprehensive global compilation of measured Ksat training
 point data (N= 13,267) called “SoilKsatDB” by importing, quality
 controlling and standardizing tabular data from existing soil profile
@@ -24,6 +22,11 @@ region and field-based measurements, respectively to evaluate the
 suitability for other regions. Here, the objective of this report to
 show the methods used to develop the PTFs with R code and stepwise
 description.
+
+SoilKsatDB [link](https://doi.org/10.5281/zenodo.3752721)
+
+Submitted to ESSD
+[link](https://essd.copernicus.org/preprints/essd-2020-149/)
 
 ## Installing and loading packages
 
