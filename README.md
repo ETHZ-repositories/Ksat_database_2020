@@ -1,5 +1,4 @@
-Pedotransfer functions (PTFs) developed for Ksat using Random forest
-(RF) algorithm
+Ksat data tutorial
 ================
 Surya Gupta, Tom Hengl, Peter Lehmann, Sara Bonetti, Dani Or
 
@@ -11,17 +10,22 @@ Surya Gupta, Tom Hengl, Peter Lehmann, Sara Bonetti, Dani Or
   - [Ksat PTF developed for Lab measurements soil samples using
     RF](#ksat-ptf-developed-for-lab-measurements-soil-samples-using-rf)
   - [Lab PTF tested on field dataset](#lab-ptf-tested-on-field-dataset)
+  - [Connect Ksat dataset with Ksat
+    metadata](#connect-ksat-dataset-with-ksat-metadata)
+  - [Connect Ksat dataset with climate zones and pedological
+    unit](#connect-ksat-dataset-with-climate-zones-and-pedological-unit)
 
 We prepared a comprehensive global compilation of measured Ksat training
 point data (N= 13,267) called “SoilKsatDB” by importing, quality
-controlling and standardizing tabular data from existing soil profile
+controlling, and standardizing tabular data from existing soil profile
 databases and legacy reports. The SoilKsatDB was used to develop the
 pedotransfer functions (PTFs) for temperate climate region and lab-based
 measured soil samples. These PTFs were applied to tropical climate
 region and field-based measurements, respectively to evaluate the
 suitability for other regions. Here, the objective of this report to
 show the methods used to develop the PTFs with R code and stepwise
-description.
+description. This document also shows that how we connect the Ksat
+dataset with metadata and climate zone dataset.
 
 SoilKsatDB [link](https://doi.org/10.5281/zenodo.3752721)
 
@@ -622,3 +626,44 @@ hexbinplot(log_ksat1~response1,
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+
+## Connect Ksat dataset with Ksat metadata
+
+``` r
+Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/New_hexbin_Datapaper/sol_ksat.pnts_horizons.csv")
+
+Ksat_metadataset<-read.csv("C:/Users/guptasu.D/Documents/New_hexbin_Datapaper/sol_ksat.pnts_metadata.csv")
+
+Ksat_dataset$new_key<- paste(Ksat_dataset$site_key,"_",Ksat_dataset$source_db)
+
+Ksat_metadataset$new_key<- paste(Ksat_metadataset$site_key,"_",Ksat_metadataset$source_db)
+
+newdata <- Ksat_dataset[order(Ksat_dataset$new_key),]
+
+newdata1 <- Ksat_metadataset[order(Ksat_metadataset$new_key),]
+
+Ksat_data_meta<- cbind(newdata, newdata1)
+```
+
+## Connect Ksat dataset with climate zones and pedological unit
+
+``` r
+Ksat_dataset1<-read.csv("C:/Users/guptasu.D/Documents/New_hexbin_Datapaper/sol_ksat.pnts_horizons.csv")
+
+Ksat_cl_pedo1<-read.csv("C:/Users/guptasu.D/Documents/New_hexbin_Datapaper/sol_ksat.pnts_cl_pedo.csv")
+
+Ksat_dataset1$new_key<- paste(Ksat_dataset1$site_key,"_",Ksat_dataset1$longitude_decimal_degrees,"_",Ksat_dataset1$latitude_decimal_degrees)
+
+Ksat_cl_pedo1$new_key<- paste(Ksat_cl_pedo1$site_key,"_",Ksat_cl_pedo1$longitude_decimal_degrees,"_",Ksat_cl_pedo1$latitude_decimal_degrees)
+
+newdata2 <- Ksat_dataset1[order(Ksat_dataset1$new_key),]
+
+newdata3 <- Ksat_cl_pedo1[order(Ksat_cl_pedo1$new_key),]
+
+Ksat_data_cl_pedo<- cbind(newdata2, newdata3)
+
+summary(Ksat_data_cl_pedo$Climate_Zone)
+```
+
+    ##      Arid    Boreal     Polar Temperate  Tropical 
+    ##      1113       582        36     10093      1443
