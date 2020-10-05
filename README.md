@@ -3,6 +3,9 @@ Pedotransfer functions (PTFs) developed for Ksat using Random forest
 ================
 Surya Gupta, Tom Hengl, Peter Lehmann, Sara Bonetti, Dani Or
 
+  - [Installing and loading packages](#installing-and-loading-packages)
+  - [Temperate climate region Ksat values
+    PTF](#temperate-climate-region-ksat-values-ptf)
   - [Temperate Ksat PTF tested on tropical
     dataset](#temperate-ksat-ptf-tested-on-tropical-dataset)
   - [Ksat PTF developed for Lab measurements soil samples using
@@ -21,6 +24,8 @@ region and field-based measurements, respectively to evaluate the
 suitability for other regions. Here, the objective of this report to
 show the methods used to develop the PTFs with R code and stepwise
 description.
+
+## Installing and loading packages
 
 ``` r
 #Loading libraries
@@ -95,7 +100,7 @@ library(randomForest)
     ## 
     ##     importance
 
-\#Temperate climate region Ksat values PTF
+## Temperate climate region Ksat values PTF
 
 Here, we loaded the Ksat dataset and extracted the temperate climate
 region based Ksat values. The soil samples were converted into log scale
@@ -280,7 +285,7 @@ varImpPlot(m.ksat, sort=TRUE, n.var=min(3, nrow(m.ksat$importance)))
 
 ![](README_files/figure-gfm/unnamed-chunk-2-2.png)<!-- -->
 
-# Temperate Ksat PTF tested on tropical dataset
+## Temperate Ksat PTF tested on tropical dataset
 
 PTF developed for the temperate region using RF used to predict the ksat
 values for tropical soil samples.
@@ -352,7 +357,7 @@ hexbinplot(log_ksat1~response1,
 
 ![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
-# Ksat PTF developed for Lab measurements soil samples using RF
+## Ksat PTF developed for Lab measurements soil samples using RF
 
 ``` r
 Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/final_ksat_dataset.csv")
@@ -524,7 +529,7 @@ varImpPlot(m.ksat, sort=TRUE, n.var=min(3, nrow(m.ksat$importance)))
 
 ![](README_files/figure-gfm/unnamed-chunk-4-2.png)<!-- -->
 
-# Lab PTF tested on field dataset
+## Lab PTF tested on field dataset
 
 ``` r
 Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/final_ksat_dataset.csv")
