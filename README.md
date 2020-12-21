@@ -39,9 +39,9 @@ Discuss.,](https://doi.org/10.5194/essd-2020-149), in review, 2020.
 Examples of using the SoilKsatDB to [generate global
 maps](https://doi.org/10.5281/zenodo.3934853) of Ksat can be found in:
 
-Gupta, S., Hengl, T., Lehmann, P., Bonetti, S., Papritz, A. and Or, D.:
-[Global prediction of soil saturated hydraulic conductivity using random
-forest in a Covariate-based Geo Transfer Functions (CoGTF)
+Gupta, S., Lehmann, P., Bonetti, S., Papritz, A. and Or, D.: [Global
+prediction of soil saturated hydraulic conductivity using random forest
+in a Covariate-based Geo Transfer Functions (CoGTF)
 framework](https://www.essoar.org/doi/10.1002/essoar.10503663.1).
 manuscript submitted to Journal of Advances in Modeling Earth Systems
 (JAMES).
