@@ -111,7 +111,7 @@ ccc
 
 ##bias
 
-bias(comparison$truth, comparison$response)
+bias(comparison$response, comparison$truth)
 
 ##RMSE
 
@@ -176,7 +176,7 @@ ccc
 
 ##bias
 
-bias(y$log_ksat, y$response)
+bias(y$response, y$log_ksat)
 
 ##RMSE
 
@@ -269,7 +269,7 @@ ccc
 
 ##bias
 
-bias(comparison$truth, comparison$response)
+bias(comparison$response, comparison$truth)
 
 ##RMSE
 
@@ -341,7 +341,7 @@ ccc
 
 ##bias
 
-bias(y$log_ksat, y$response)
+bias(y$response, y$log_ksat)
 
 ##RMSE
 
