@@ -238,10 +238,10 @@ ccc
 ``` r
 ##bias
 
-bias(comparison$truth, comparison$response)
+bias(comparison$response, comparison$truth)
 ```
 
-    ## [1] -0.001600707
+    ## [1] 0.001600707
 
 ``` r
 ##RMSE
@@ -343,10 +343,10 @@ ccc
 ``` r
 ##bias
 
-bias(y$log_ksat, y$response)
+bias(y$response, y$log_ksat)
 ```
 
-    ## [1] 0.1992109
+    ## [1] -0.1992109
 
 ``` r
 ##RMSE
@@ -482,10 +482,10 @@ ccc
 ``` r
 ##bias
 
-bias(comparison$truth, comparison$response)
+bias(comparison$response, comparison$truth)
 ```
 
-    ## [1] 0.0004411372
+    ## [1] -0.0004411372
 
 ``` r
 ##RMSE
@@ -592,10 +592,10 @@ ccc
 ``` r
 ##bias
 
-bias(y$log_ksat, y$response)
+bias(y$response, y$log_ksat)
 ```
 
-    ## [1] 0.235625
+    ## [1] -0.235625
 
 ``` r
 ##RMSE
