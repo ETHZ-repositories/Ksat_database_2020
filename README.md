@@ -10,13 +10,9 @@ Surya Gupta, Tom Hengl, Peter Lehmann, Sara Bonetti, Dani Or
   - [Ksat PTF developed for Lab measurements soil samples using
     RF](#ksat-ptf-developed-for-lab-measurements-soil-samples-using-rf)
   - [Lab PTF tested on field dataset](#lab-ptf-tested-on-field-dataset)
-  - [Connect Ksat dataset with Ksat
-    metadata](#connect-ksat-dataset-with-ksat-metadata)
-  - [Connect Ksat dataset with climate zones and pedological
-    unit](#connect-ksat-dataset-with-climate-zones-and-pedological-unit)
 
 We prepared a comprehensive global compilation of measured Ksat training
-point data (N= 13,267) called “SoilKsatDB” by importing, quality
+point data (N= 13,258) called “SoilKsatDB” by importing, quality
 controlling, and standardizing tabular data from existing soil profile
 databases and legacy reports. The SoilKsatDB was used to develop the
 pedotransfer functions (PTFs) for temperate climate region and lab-based
@@ -34,7 +30,7 @@ To cite this dataset please use:
 Gupta, S., Hengl, T., Lehmann, P., Bonetti, S., and Or, D.: [SoilKsatDB:
 global soil saturated hydraulic conductivity measurements for geoscience
 applications, Earth Syst. Sci. Data
-Discuss.,](https://doi.org/10.5194/essd-2020-149), in review, 2020.
+Discuss.,](https://doi.org/10.5194/essd-2020-149), in review, 2021.
 
 Examples of using the SoilKsatDB to [generate global
 maps](https://doi.org/10.5281/zenodo.3934853) of Ksat can be found in:
@@ -43,7 +39,7 @@ Gupta, S., Lehmann, P., Bonetti, S., Papritz, A. and Or, D.: [Global
 prediction of soil saturated hydraulic conductivity using random forest
 in a Covariate-based Geo Transfer Functions (CoGTF)
 framework](https://www.essoar.org/doi/10.1002/essoar.10503663.1).
-manuscript submitted to Journal of Advances in Modeling Earth Systems
+manuscript accepted to Journal of Advances in Modeling Earth Systems
 (JAMES).
 
 ## Installing and loading packages
@@ -129,12 +125,12 @@ and then selected points with available three soil basic properties
 (sand, clay and bulk density).
 
 ``` r
-Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/final_ksat_dataset.csv")
+Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/final_ksat_dataset_4_2.csv")
 
 nrow(Ksat_dataset)
 ```
 
-    ## [1] 13267
+    ## [1] 13258
 
 ``` r
 Ksat_silt<- Ksat_dataset[!is.na (Ksat_dataset$silt_tot_psa),]
@@ -210,19 +206,19 @@ summary(gg)
     ## lm(formula = comparison$truth ~ comparison$response)
     ## 
     ## Residuals:
-    ##     Min      1Q  Median      3Q     Max 
-    ## -4.7110 -0.2529  0.0470  0.3575  2.7226 
+    ##      Min       1Q   Median       3Q      Max 
+    ## -3.10753 -0.26038  0.01586  0.32553  2.99783 
     ## 
     ## Coefficients:
     ##                     Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)          0.18483    0.04804   3.847 0.000124 ***
-    ## comparison$response  0.91058    0.02157  42.220  < 2e-16 ***
+    ## (Intercept)          0.10886    0.04381   2.485   0.0131 *  
+    ## comparison$response  0.95042    0.01969  48.264   <2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
-    ## Residual standard error: 0.6885 on 1657 degrees of freedom
-    ## Multiple R-squared:  0.5182, Adjusted R-squared:  0.518 
-    ## F-statistic:  1783 on 1 and 1657 DF,  p-value: < 2.2e-16
+    ## Residual standard error: 0.6431 on 1657 degrees of freedom
+    ## Multiple R-squared:  0.5843, Adjusted R-squared:  0.5841 
+    ## F-statistic:  2329 on 1 and 1657 DF,  p-value: < 2.2e-16
 
 ``` r
 ##CCC
@@ -233,7 +229,7 @@ ccc
 ```
 
     ##         est    lwr.ci    upr.ci
-    ## 1 0.7004628 0.6765074 0.7229374
+    ## 1 0.7466269 0.7257605 0.7661209
 
 ``` r
 ##bias
@@ -241,7 +237,7 @@ ccc
 bias(comparison$response, comparison$truth)
 ```
 
-    ## [1] 0.001600707
+    ## [1] -0.005981836
 
 ``` r
 ##RMSE
@@ -249,7 +245,7 @@ bias(comparison$response, comparison$truth)
 rmse(comparison$truth, comparison$response)
 ```
 
-    ## [1] 0.6916353
+    ## [1] 0.6439256
 
 ``` r
 ##Transform log10 to normal values
@@ -297,8 +293,8 @@ m.ksat
     ##                      Number of trees: 500
     ## No. of variables tried at each split: 3
     ## 
-    ##           Mean of squared residuals: 0.4567438
-    ##                     % Var explained: 53.65
+    ##           Mean of squared residuals: 0.4586289
+    ##                     % Var explained: 53.45
 
 ``` r
 varImpPlot(m.ksat, sort=TRUE, n.var=min(3, nrow(m.ksat$importance)))
@@ -338,7 +334,7 @@ ccc
 ```
 
     ##         est    lwr.ci    upr.ci
-    ## 1 0.5208695 0.4776879 0.5615403
+    ## 1 0.4873967 0.4423483 0.5299919
 
 ``` r
 ##bias
@@ -346,7 +342,7 @@ ccc
 bias(y$response, y$log_ksat)
 ```
 
-    ## [1] -0.1992109
+    ## [1] -0.1995795
 
 ``` r
 ##RMSE
@@ -354,7 +350,7 @@ bias(y$response, y$log_ksat)
 rmse(y$log_ksat, y$response)
 ```
 
-    ## [1] 0.9033023
+    ## [1] 0.9414729
 
 ``` r
 ##Transform log10 to normal values
@@ -381,7 +377,7 @@ hexbinplot(log_ksat1~response1,
 ## Ksat PTF developed for Lab measurements soil samples using RF
 
 ``` r
-Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/final_ksat_dataset.csv")
+Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/final_ksat_dataset_4_2.csv")
 
 Ksat_silt<- Ksat_dataset[!is.na (Ksat_dataset$silt_tot_psa),]
 
@@ -408,7 +404,7 @@ PTF_lab <- WIthout_error[sel.r,sel.n]
 nrow(PTF_lab)
 ```
 
-    ## [1] 8498
+    ## [1] 8491
 
 ``` r
 ## dividing the dataset based on testing and trainning datasets
@@ -419,7 +415,7 @@ test.set = seq(3, nrow(PTF_lab), by = 5)
 str(test.set)
 ```
 
-    ##  num [1:1700] 3 8 13 18 23 28 33 38 43 48 ...
+    ##  num [1:1698] 3 8 13 18 23 28 33 38 43 48 ...
 
 ``` r
 training.set = which(!1:nrow(PTF_lab) %in% test.set)
@@ -427,7 +423,7 @@ training.set = which(!1:nrow(PTF_lab) %in% test.set)
 str(training.set)
 ```
 
-    ##  int [1:6798] 1 2 4 5 6 7 9 10 11 12 ...
+    ##  int [1:6793] 1 2 4 5 6 7 9 10 11 12 ...
 
 ``` r
 learner = mlr::makeLearner("regr.ranger", mtry =3, num.trees=85)
@@ -455,18 +451,18 @@ summary(gg)
     ## 
     ## Residuals:
     ##     Min      1Q  Median      3Q     Max 
-    ## -4.8447 -0.2490  0.0335  0.3410  3.1430 
+    ## -3.6691 -0.2441  0.0351  0.3505  2.9877 
     ## 
     ## Coefficients:
     ##                     Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)          0.10442    0.04487   2.327   0.0201 *  
-    ## comparison$response  0.95004    0.02019  47.066   <2e-16 ***
+    ## (Intercept)          0.21531    0.04509   4.775 1.95e-06 ***
+    ## comparison$response  0.90942    0.02038  44.627  < 2e-16 ***
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     ## 
-    ## Residual standard error: 0.6503 on 1698 degrees of freedom
-    ## Multiple R-squared:  0.5661, Adjusted R-squared:  0.5658 
-    ## F-statistic:  2215 on 1 and 1698 DF,  p-value: < 2.2e-16
+    ## Residual standard error: 0.6629 on 1696 degrees of freedom
+    ## Multiple R-squared:  0.5401, Adjusted R-squared:  0.5398 
+    ## F-statistic:  1992 on 1 and 1696 DF,  p-value: < 2.2e-16
 
 ``` r
 ##CCC
@@ -477,7 +473,7 @@ ccc
 ```
 
     ##         est    lwr.ci    upr.ci
-    ## 1 0.7323719 0.7109162 0.7524657
+    ## 1 0.7181705 0.6954837 0.7394268
 
 ``` r
 ##bias
@@ -485,7 +481,7 @@ ccc
 bias(comparison$response, comparison$truth)
 ```
 
-    ## [1] -0.0004411372
+    ## [1] -0.02806462
 
 ``` r
 ##RMSE
@@ -493,7 +489,7 @@ bias(comparison$response, comparison$truth)
 rmse(comparison$truth, comparison$response)
 ```
 
-    ## [1] 0.6510579
+    ## [1] 0.6669777
 
 ``` r
 ##Transform log10 to normal values
@@ -541,8 +537,8 @@ m.ksat
     ##                      Number of trees: 500
     ## No. of variables tried at each split: 3
     ## 
-    ##           Mean of squared residuals: 0.4368101
-    ##                     % Var explained: 55.16
+    ##           Mean of squared residuals: 0.4335024
+    ##                     % Var explained: 55.54
 
 ``` r
 varImpPlot(m.ksat, sort=TRUE, n.var=min(3, nrow(m.ksat$importance)))
@@ -553,7 +549,7 @@ varImpPlot(m.ksat, sort=TRUE, n.var=min(3, nrow(m.ksat$importance)))
 ## Lab PTF tested on field dataset
 
 ``` r
-Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/final_ksat_dataset.csv")
+Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/final_ksat_dataset_4_2.csv")
 
 Ksat_silt<- Ksat_dataset[!is.na (Ksat_dataset$silt_tot_psa),]
 
@@ -586,8 +582,8 @@ ccc = DescTools::CCC(y$log_ksat, y$response, ci = "z-transform", conf.level = 0.
 ccc
 ```
 
-    ##         est     lwr.ci    upr.ci
-    ## 1 0.1009226 0.06345172 0.1381093
+    ##          est     lwr.ci    upr.ci
+    ## 1 0.09400523 0.05749755 0.1302618
 
 ``` r
 ##bias
@@ -595,7 +591,7 @@ ccc
 bias(y$response, y$log_ksat)
 ```
 
-    ## [1] -0.235625
+    ## [1] -0.2216116
 
 ``` r
 ##RMSE
@@ -603,7 +599,7 @@ bias(y$response, y$log_ksat)
 rmse(y$log_ksat, y$response)
 ```
 
-    ## [1] 1.202581
+    ## [1] 1.18587
 
 ``` r
 ##Transform log10 to normal values
@@ -626,44 +622,3 @@ hexbinplot(log_ksat1~response1,
 ```
 
 ![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
-
-## Connect Ksat dataset with Ksat metadata
-
-``` r
-Ksat_dataset<-read.csv("C:/Users/guptasu.D/Documents/New_hexbin_Datapaper/sol_ksat.pnts_horizons.csv")
-
-Ksat_metadataset<-read.csv("C:/Users/guptasu.D/Documents/New_hexbin_Datapaper/sol_ksat.pnts_metadata.csv")
-
-Ksat_dataset$new_key<- paste(Ksat_dataset$site_key,"_",Ksat_dataset$source_db)
-
-Ksat_metadataset$new_key<- paste(Ksat_metadataset$site_key,"_",Ksat_metadataset$source_db)
-
-newdata <- Ksat_dataset[order(Ksat_dataset$new_key),]
-
-newdata1 <- Ksat_metadataset[order(Ksat_metadataset$new_key),]
-
-Ksat_data_meta<- cbind(newdata, newdata1)
-```
-
-## Connect Ksat dataset with climate zones and pedological unit
-
-``` r
-Ksat_dataset1<-read.csv("C:/Users/guptasu.D/Documents/New_hexbin_Datapaper/sol_ksat.pnts_horizons.csv")
-
-Ksat_cl_pedo1<-read.csv("C:/Users/guptasu.D/Documents/New_hexbin_Datapaper/sol_ksat.pnts_cl_pedo.csv")
-
-Ksat_dataset1$new_key<- paste(Ksat_dataset1$site_key,"_",Ksat_dataset1$longitude_decimal_degrees,"_",Ksat_dataset1$latitude_decimal_degrees)
-
-Ksat_cl_pedo1$new_key<- paste(Ksat_cl_pedo1$site_key,"_",Ksat_cl_pedo1$longitude_decimal_degrees,"_",Ksat_cl_pedo1$latitude_decimal_degrees)
-
-newdata2 <- Ksat_dataset1[order(Ksat_dataset1$new_key),]
-
-newdata3 <- Ksat_cl_pedo1[order(Ksat_cl_pedo1$new_key),]
-
-Ksat_data_cl_pedo<- cbind(newdata2, newdata3)
-
-summary(Ksat_data_cl_pedo$Climate_Zone)
-```
-
-    ##      Arid    Boreal     Polar Temperate  Tropical 
-    ##      1113       582        36     10093      1443
